@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <!-- Clip head shape to keep webbing lines inside the mask -->
+    <clipPath id="head-clip">
+      <path d="M 50,18 C 34,18 24,32 24,53 C 24,71 34,84 50,84 C 66,84 76,71 76,53 C 76,32 66,18 50,18 Z" />
+    </clipPath>
+  </defs>
+
+  <!-- Shadow below Spiderman -->
+  <ellipse cx="50" cy="55" rx="27" ry="33" fill="rgba(0,0,0,0.15)" />
+
+  <!-- Clean Comic Lightning Bolts (Left and Right) -->
+  <!-- Top Left Bolt -->
+  <path d="M 12 28 L 22 36 L 16 38 L 24 48 L 18 50 L 25 58" fill="#ffd200" stroke="#111113" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Bottom Left Bolt -->
+  <path d="M 10 58 L 18 64 L 14 66 L 22 74 L 16 76 L 23 82" fill="#ffd200" stroke="#111113" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Top Right Bolt -->
+  <path d="M 88 28 L 78 36 L 84 38 L 76 48 L 82 50 L 75 58" fill="#ffd200" stroke="#111113" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Bottom Right Bolt -->
+  <path d="M 90 58 L 82 64 L 86 66 L 78 74 L 84 76 L 77 82" fill="#ffd200" stroke="#111113" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Headphone Band (Behind Head) -->
+  <path d="M 24,51 C 24,19 76,19 76,51" fill="none" stroke="#111113" stroke-width="10" stroke-linecap="round" />
+  <path d="M 24,51 C 24,19 76,19 76,51" fill="none" stroke="#3f3f46" stroke-width="6" stroke-linecap="round" />
+
+  <!-- Red Head Base -->
+  <path d="M 50,18 C 34,18 24,32 24,53 C 24,71 34,84 50,84 C 66,84 76,71 76,53 C 76,32 66,18 50,18 Z" fill="#e22424" stroke="#111113" stroke-width="4.5" />
+
+  <!-- Web lines clipped to head -->
+  <g clip-path="url(#head-clip)">
+    <!-- Radial Web Lines -->
+    <g stroke="#111113" stroke-width="2">
+      <line x1="50" y1="52" x2="50" y2="10" />
+      <line x1="50" y1="52" x2="50" y2="90" />
+      <line x1="50" y1="52" x2="10" y2="52" />
+      <line x1="50" y1="52" x2="90" y2="52" />
+      <line x1="50" y1="52" x2="15" y2="17" />
+      <line x1="50" y1="52" x2="85" y2="17" />
+      <line x1="50" y1="52" x2="15" y2="87" />
+      <line x1="50" y1="52" x2="85" y2="87" />
+      
+      <line x1="50" y1="52" x2="30" y2="12" />
+      <line x1="50" y1="52" x2="70" y2="12" />
+      <line x1="50" y1="52" x2="30" y2="92" />
+      <line x1="50" y1="52" x2="70" y2="92" />
+    </g>
+    
+    <!-- Concentric Web Arcs (Convex towards center 50,52) -->
+    <g stroke="#111113" stroke-width="1.8" fill="none">
+      <!-- Upper Webs -->
+      <path d="M 28,40 C 35,46 65,46 72,40" />
+      <path d="M 32,30 C 38,37 62,37 68,30" />
+      <path d="M 36,20 C 41,27 59,27 64,20" />
+      
+      <!-- Lower Webs -->
+      <path d="M 28,64 C 35,58 65,58 72,64" />
+      <path d="M 32,74 C 38,67 62,67 68,74" />
+      <path d="M 36,84 C 41,77 59,77 64,84" />
+    </g>
+  </g>
+
+  <!-- Eyes (Classic Sharp Spiderman Eyes) -->
+  <!-- Left Eye -->
+  <path d="M 44,45 C 40,40 28,45 26,53 C 24,61 32,63 37,59 C 42,55 45,50 44,45 Z" fill="#ffffff" stroke="#111113" stroke-width="4.5" stroke-linejoin="round" />
+  <!-- Right Eye -->
+  <path d="M 56,45 C 60,40 72,45 74,53 C 76,61 68,63 63,59 C 58,55 55,50 56,45 Z" fill="#ffffff" stroke="#111113" stroke-width="4.5" stroke-linejoin="round" />
+
+  <!-- Over-Ear Headphones (Left and Right Cups, cleanly rounded) -->
+  <!-- Left Ear Cup -->
+  <g transform="rotate(-10 22 53)">
+    <ellipse cx="21" cy="53" rx="7" ry="14" fill="#27272a" stroke="#111113" stroke-width="4.5" />
+    <ellipse cx="21" cy="53" rx="4" ry="10" fill="#18181b" />
+  </g>
+  <!-- Right Ear Cup -->
+  <g transform="rotate(10 78 53)">
+    <ellipse cx="79" cy="53" rx="7" ry="14" fill="#27272a" stroke="#111113" stroke-width="4.5" />
+    <ellipse cx="79" cy="53" rx="4" ry="10" fill="#18181b" />
+  </g>
+</svg>

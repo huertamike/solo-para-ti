@@ -1,0 +1,2211 @@
+/* ==========================================
+   CSS PRINCIPAL - REGALO DE NOCHE ESTRELLADA 🌌
+   ========================================== */
+
+/* Variables del Sistema de Diseño */
+:root {
+  --bg-deep: #03050c;
+  --bg-cosmic: linear-gradient(135deg, #050814 0%, #0c1033 50%, #17123a 100%);
+  --accent-gold: #ffd700;
+  --accent-gold-glow: rgba(255, 215, 0, 0.4);
+  --accent-lavender: #d2bdff;
+  --text-primary: #ffffff;
+  --text-muted: #a6afcb;
+  --glass-bg: rgba(13, 19, 44, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-glow: rgba(78, 52, 225, 0.15);
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Montserrat', sans-serif;
+  --letter-paper: #fefdf7;
+}
+
+/* Reset de Estilos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-deep);
+  background-image: var(--bg-cosmic);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Scrollbar Personalizado */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(5, 8, 20, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-lavender);
+}
+
+/* ==========================================
+   EFECTO NOCHE ESTRELLADA ANIMADO 🌌
+   ========================================== */
+.starry-sky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+/* Variaciones de tamaños y brillos */
+.star.gold {
+  background-color: var(--accent-gold);
+  box-shadow: 0 0 4px var(--accent-gold);
+}
+
+.star.lavender {
+  background-color: var(--accent-lavender);
+  box-shadow: 0 0 4px var(--accent-lavender);
+}
+
+/* Animaciones de Parpadeo */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.twinkle-fast { animation: twinkle 1.5s infinite ease-in-out; }
+.twinkle-medium { animation: twinkle 3s infinite ease-in-out; }
+.twinkle-slow { animation: twinkle 5s infinite ease-in-out; }
+
+/* Estrellas Fugaces */
+.shooting-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shooting-star {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(-45deg, #ffffff, rgba(0, 0, 255, 0));
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
+  animation: tail 4s ease-in-out infinite, shooting 4s ease-in-out infinite;
+}
+
+.shooting-star::before, .shooting-star::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 1px);
+  right: 0;
+  height: 2px;
+  background: linear-gradient(-45deg, rgba(0, 0, 255, 0), #ffffff, rgba(0, 0, 255, 0));
+  transform: translateX(50%) rotate(45deg);
+  border-radius: 999px;
+}
+
+.shooting-star::after {
+  transform: translateX(50%) rotate(-45deg);
+}
+
+@keyframes tail {
+  0% { width: 0; }
+  30% { width: 100px; }
+  100% { width: 0; }
+}
+
+@keyframes shooting {
+  0% { transform: translateX(0) translateY(0) rotate(-45deg); }
+  30% { transform: translateX(-300px) translateY(300px) rotate(-45deg); }
+  100% { transform: translateX(-300px) translateY(300px) rotate(-45deg); }
+}
+
+/* ==========================================
+   ESTRUCTURA DE PANTALLAS (Transiciones)
+   ========================================== */
+.active-screen {
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.hidden-screen {
+  display: none !important;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.last-song-guide-text.hidden {
+  display: none !important;
+}
+
+/* ==========================================
+   PANTALLA 1: BIENVENIDA (El Sobre de Snoopy)
+   ========================================== */
+#welcome-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px; /* Aumentado de 600px */
+  padding: 20px;
+  perspective: 1000px; /* Para efecto 3D del sobre */
+}
+
+/* El Sobre */
+.envelope-wrapper {
+  position: relative;
+  width: 650px; /* Aumentado de 450px */
+  height: 420px; /* Aumentado de 300px */
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--card-shadow);
+  border-radius: 8px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+  margin-bottom: 40px;
+}
+
+.envelope-wrapper:hover {
+  transform: scale(1.02) rotateX(5deg);
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* El Flap (Tapa del sobre) */
+.envelope .flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 325px solid transparent; /* Aumentado */
+  border-right: 325px solid transparent; /* Aumentado */
+  border-top: 210px solid rgba(19, 26, 60, 0.95); /* Aumentado */
+  border-radius: 8px 8px 0 0;
+  transform-origin: top;
+  z-index: 3;
+  transition: transform 0.5s 0.3s ease, z-index 0.2s 0.5s;
+  pointer-events: none; /* Evita bloquear clics en la carta */
+}
+
+/* Bolsillo del sobre */
+.envelope .pocket {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-left: 325px solid rgba(13, 18, 45, 0.85); /* Aumentado */
+  border-right: 325px solid rgba(13, 18, 45, 0.85); /* Aumentado */
+  border-bottom: 210px solid rgba(22, 29, 69, 0.9); /* Aumentado */
+  border-top: 210px solid transparent; /* Aumentado */
+  border-radius: 8px;
+  z-index: 2;
+  pointer-events: none; /* Evita bloquear clics en la carta */
+}
+
+/* La Carta Adentro */
+.envelope .letter {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  width: 600px; /* Aumentado de 410px */
+  height: 380px; /* Aumentado de 270px */
+  background-color: var(--letter-paper);
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  padding: 35px; /* Aumentado de 25px */
+  color: #2b2b2b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateY(0);
+  transition: transform 0.6s ease, height 0.6s ease, top 0.6s ease;
+  overflow: visible; /* Permitir que los stickers sobresalgan un poco */
+  pointer-events: auto; /* Asegura clics dentro de la carta */
+}
+
+/* Stickers de Snoopy y Woodstock */
+.woodstock-sticker {
+  position: absolute;
+  top: 15px; /* Posicionado adentro en la esquina superior derecha */
+  right: 15px; /* Posicionado adentro */
+  width: 90px; /* Tamaño real del dibujo sin márgenes transparentes */
+  height: auto;
+  transform: rotate(10deg);
+  z-index: 10;
+  pointer-events: none; /* No estorba con el scroll o clics */
+  opacity: 0; /* Oculto cuando el sobre está cerrado */
+  transition: opacity 0.5s ease;
+}
+
+.snoopy-sticker {
+  position: absolute;
+  bottom: 85px; /* Posicionado adentro en la esquina inferior izquierda */
+  left: 20px; /* Posicionado adentro */
+  width: 120px; /* Tamaño real del dibujo sin márgenes transparentes */
+  height: auto;
+  transform: rotate(-5deg);
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0; /* Oculto cuando el sobre está cerrado */
+  transition: opacity 0.5s ease;
+}
+
+/* Mostrar los stickers con una transición cuando se abra la carta */
+.envelope-wrapper.open .woodstock-sticker,
+.envelope-wrapper.open .snoopy-sticker {
+  opacity: 1;
+}
+
+.letter-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1.5px dashed rgba(43, 43, 43, 0.15);
+  padding-bottom: 10px;
+}
+
+.snoopy-badge {
+  width: 115px; /* Aumentado un 75% */
+  height: 115px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(163, 29, 29, 0.25);
+  background-color: #fff;
+  padding: 2px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.letter-header h2.letter-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: #d63031; /* Título rojo */
+  font-weight: 700;
+}
+
+.letter-body {
+  font-family: var(--font-serif);
+  font-size: 1.12rem; /* Aumentado para mejor lectura en laptops */
+  line-height: 1.6;
+  color: #3d3d3d;
+  margin: 12px 0;
+  font-style: italic;
+  overflow-y: auto;
+  max-height: 160px;
+  padding-left: 120px; /* Deja espacio a la izquierda para el sticker de Snoopy y evita que tape el texto */
+  padding-right: 90px; /* Deja espacio a la derecha para Woodstock y evita solapamientos */
+}
+
+.letter-body p {
+  margin-bottom: 10px;
+}
+
+.letter-body::-webkit-scrollbar {
+  width: 4px;
+}
+.letter-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.signature-red {
+  font-family: var(--font-serif);
+  font-weight: bold;
+  text-align: right;
+  color: #d63031; /* Firma en rojo */
+  font-size: 1.1rem; /* Aumentado */
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.letter-footer {
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Comportamiento al abrir el sobre */
+.envelope-wrapper.open {
+  cursor: default;
+  transform: translateY(100px); /* Desplaza el sobre hacia abajo para centrar la carta abierta */
+}
+
+.envelope-wrapper.open:hover {
+  transform: translateY(100px) scale(1);
+}
+
+.envelope-wrapper.open .flap {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+
+.envelope-wrapper.open .letter {
+  z-index: 10;
+  top: -200px; /* Reducido para evitar que se salga de la pantalla arriba */
+  height: 560px; /* Reducido para que quepa en viewports estándar de laptop */
+  transform: translate3d(0, 0, 10px); /* Proyección 3D al frente */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  cursor: default;
+}
+
+.envelope-wrapper.open .letter-body {
+  max-height: 330px; /* Ajustado al alto total de 560px */
+}
+
+.envelope-wrapper.open .letter-footer {
+  opacity: 1;
+  pointer-events: auto;
+  margin-top: 15px;
+}
+
+/* Botón Brillante */
+.btn-glow {
+  background: linear-gradient(90deg, #4e34e1, #9b59b6);
+  border: none;
+  padding: 12px 28px;
+  color: #fff;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(155, 89, 182, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(155, 89, 182, 0.7);
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  transform: rotate(45deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.btn-glow:hover::after {
+  left: 120%;
+  opacity: 1;
+}
+
+.welcome-instruction-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  text-align: center;
+  transition: opacity 0.5s ease;
+  z-index: 10;
+}
+
+.spiderman-welcome-sticker {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 4px 15px rgba(226, 36, 36, 0.45));
+  animation: float-sticker 3s infinite ease-in-out;
+}
+
+@keyframes float-sticker {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+.welcome-instruction-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2), 0 0 25px rgba(255, 51, 102, 0.35);
+  letter-spacing: 0.5px;
+}
+
+.animated-mail {
+  animation: float 2s infinite ease-in-out;
+  color: var(--accent-lavender);
+  margin-right: 5px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* ==========================================
+   PANTALLA 2: PLAYLIST (Lista de Canciones)
+   ========================================== */
+.playlist-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.playlist-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.glow-title {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  color: #fff;
+  text-shadow: 0 0 15px var(--accent-gold-glow), 0 0 3px #fff;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+/* Lista de Canciones Vertical (Estilo Playlist) */
+.playlist-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Tarjetas de Canciones Horizontales (Glassmorphic) */
+.song-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: row; /* Flujo horizontal */
+  align-items: center;
+  text-align: left;
+  box-shadow: var(--card-shadow);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  gap: 25px;
+}
+
+.song-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, var(--glass-glow) 0%, transparent 70%);
+  z-index: -1;
+}
+
+.song-card:hover {
+  transform: translateX(6px); /* Se desplaza ligeramente a la derecha en hover */
+  border-color: rgba(210, 189, 255, 0.25);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(210, 189, 255, 0.1);
+}
+
+.card-cover-wrapper {
+  position: relative;
+  width: 100px; /* Tamaño perfecto para lista horizontal */
+  height: 100px;
+  border-radius: 50%; /* Estilo vinilo circular */
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  border: 3px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  flex-shrink: 0; /* No se encoje */
+}
+
+/* Efecto vinilo al centro */
+.card-cover-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  background: #000;
+  border: 2px solid var(--accent-gold);
+  border-radius: 50%;
+  box-shadow: inset 0 0 3px rgba(255,255,255,0.5);
+  z-index: 2;
+}
+
+.song-card:hover .card-cover-wrapper {
+  transform: rotate(45deg) scale(1.05); /* Girar vinilo al hacer hover */
+}
+
+.song-card-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.song-card-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.song-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.song-card-artist {
+  color: var(--accent-lavender);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.song-card-comment {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.45;
+  margin-top: 5px;
+}
+/* ==========================================
+   PANTALLA 3: REPRODUCTOR (Pantalla Dividida)
+   ========================================== */
+.player-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-back {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: var(--font-sans);
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  align-self: flex-start;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent-lavender);
+  transform: translateX(-3px);
+}
+
+.split-view {
+  display: grid;
+  grid-template-columns: 4.5fr 5.5fr;
+  gap: 40px;
+  flex: 1;
+}
+
+/* --- LADO IZQUIERDO: Portada y Letra --- */
+.player-left {
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: var(--card-shadow);
+  max-height: calc(100vh - 150px);
+}
+
+.song-info-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.cover-container {
+  position: relative;
+  width: 90px;
+  height: 90px;
+}
+
+.player-cover {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  z-index: 2;
+  position: relative;
+}
+
+.cover-glow-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-size: cover;
+  filter: blur(15px);
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.player-cover.spinning {
+  animation: spin 20s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.title-container h2 {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.title-container h3 {
+  font-size: 0.95rem;
+  color: var(--accent-lavender);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.personal-note-box {
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 25px;
+}
+
+.personal-note-box p {
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.personal-note-box i {
+  color: var(--accent-gold);
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* Letras de Música (Estilo Apple Music) */
+.lyrics-container {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px 0;
+}
+
+.lyrics-fade-top, .lyrics-fade-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 35px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.lyrics-fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(13, 19, 44, 0.85) 0%, transparent 100%);
+}
+
+.lyrics-fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(13, 19, 44, 0.85) 0%, transparent 100%);
+}
+
+.lyrics-content {
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lyrics-line {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+}
+
+.lyrics-line:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.lyrics-line.active {
+  color: #fff;
+  opacity: 1;
+  font-size: 1.35rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(210, 189, 255, 0.3);
+  font-weight: 700;
+}
+
+/* --- LADO DERECHO: Reproductor de Video --- */
+.player-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ventana estilo Navegador */
+.video-window {
+  width: 100%;
+  background: #181d34;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.video-header {
+  height: 36px;
+  background: #0f1324;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.video-header .dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.video-header .dot.red { background: #ff5f56; }
+.video-header .dot.yellow { background: #ffbd2e; }
+.video-header .dot.green { background: #27c93f; }
+
+.video-title-bar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.video-ratio-box {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* Relación de aspecto 16:9 */
+  background: #000;
+}
+
+.video-ratio-box iframe,
+.video-ratio-box #youtube-player-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Controles de Reproducción */
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent-lavender);
+  transform: scale(1.05);
+  color: var(--accent-lavender);
+}
+
+.control-btn.play-btn {
+  width: 65px;
+  height: 65px;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, #4e34e1 0%, #7e57c2 100%);
+  border: none;
+  box-shadow: 0 5px 15px rgba(78, 52, 225, 0.4);
+}
+
+.control-btn.play-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 25px rgba(78, 52, 225, 0.6);
+  color: #fff;
+}
+
+/* ==========================================
+   DISEÑO RESPONSIVO (MÓVIL) 📱
+   ========================================== */
+@media (max-width: 900px) {
+  .split-view {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .player-left {
+    max-height: none;
+    height: 480px;
+  }
+  
+  .envelope-wrapper {
+    width: 90vw;
+    height: 60vw;
+  }
+  
+  .envelope .flap {
+    border-left-width: 45vw;
+    border-right-width: 45vw;
+    border-top-width: 30vw;
+  }
+  
+  .envelope .pocket {
+    border-left-width: 45vw;
+    border-right-width: 45vw;
+    border-bottom-width: 30vw;
+    border-top-width: 30vw;
+  }
+  
+  .envelope .letter {
+    width: calc(90vw - 40px);
+    height: calc(60vw - 30px);
+  }
+  
+  .envelope-wrapper.open .letter {
+    top: -150px;
+    height: 420px;
+  }
+  
+  .woodstock-sticker {
+    width: 15vw;
+    top: 2vw;
+    right: 2vw;
+  }
+  
+  .snoopy-sticker {
+    width: 20vw;
+    bottom: 12vw;
+    left: 3vw;
+  }
+  
+  .song-card {
+    padding: 15px 20px;
+    gap: 15px;
+  }
+  
+  .card-cover-wrapper {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .song-card-title {
+    font-size: 1.15rem;
+    gap: 5px;
+  }
+  
+  .song-card-artist {
+    font-size: 0.75rem;
+  }
+  
+  .song-card-comment {
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  .glow-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-container {
+    padding: 10px;
+  }
+  
+  .envelope-wrapper.open .letter {
+    top: -120px;
+    height: 440px;
+    padding: 15px;
+  }
+  
+  .letter-header h2 {
+    font-size: 1.1rem;
+  }
+  
+  .letter-body {
+    font-size: 0.85rem;
+    max-height: 250px;
+    padding-left: 60px;
+    padding-right: 50px;
+  }
+  
+  .woodstock-sticker {
+    width: 18vw;
+    top: 2vw;
+    right: 2vw;
+  }
+  
+  .snoopy-sticker {
+    width: 24vw;
+    bottom: 14vw;
+    left: 3vw;
+  }
+  
+  .song-info-wrapper {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+}
+
+/* ==========================================
+   AMBIENT GLOW DINÁMICO (APPLE MUSIC STYLE) 🎵
+   ========================================== */
+.ambient-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(100px) saturate(2.3) brightness(1.2);
+  transition: opacity 0.6s ease, background-image 0.6s ease;
+  transform: scale(1.2); /* Ampliamos para evitar bordes blancos por el desenfoque */
+  will-change: opacity, background-image;
+}
+
+.ambient-glow.active {
+  opacity: 0.52; /* Opacidad más viva y luminosa */
+}
+
+/* ==========================================
+   SISTEMA DE MINIJUEGO: CORAZÓN DE TELARAÑA ❤️🕸️
+   ========================================== */
+
+/* Contenedor del Corazón Coleccionable en el Reproductor */
+.collectible-heart-wrapper {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-left: 15px;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+}
+
+.collectible-heart-wrapper:hover {
+  transform: scale(1.22);
+}
+
+.collectible-heart-svg, .global-heart-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Sectores y Telaraña */
+.coll-seg, .heart-seg {
+  fill: rgba(255, 255, 255, 0.08);
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 0.5px;
+  transition: fill 0.6s ease, filter 0.6s ease, opacity 0.6s ease;
+}
+
+/* Segmento Destacado a Recolectar */
+.coll-seg.highlighted {
+  fill: #ff3366;
+  filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.95));
+  cursor: pointer;
+  animation: pulse-red-glow 1.8s infinite ease-in-out;
+}
+
+@keyframes pulse-red-glow {
+  0%, 100% {
+    fill: #ff2255;
+    filter: drop-shadow(0 0 5px rgba(255, 34, 85, 0.6));
+  }
+  50% {
+    fill: #ff4477;
+    filter: drop-shadow(0 0 12px rgba(255, 68, 119, 1));
+    transform: scale(1.02);
+  }
+}
+
+/* Segmentos ya Recolectados (Tanto en el reproductor como en el acumulador global) */
+.coll-seg.collected, .heart-seg.collected {
+  fill: #ff3366;
+  stroke: rgba(255, 255, 255, 0.2);
+  filter: drop-shadow(0 0 4px rgba(255, 51, 102, 0.6));
+}
+
+/* Líneas de Telaraña (Spider-Man aesthetic) */
+.web-line {
+  stroke: rgba(0, 191, 255, 0.45);
+  stroke-width: 0.75px;
+  pointer-events: none;
+  filter: drop-shadow(0 0 1px rgba(0, 191, 255, 0.6));
+}
+
+.web-heart-strand {
+  fill: none;
+  stroke: rgba(0, 191, 255, 0.35);
+  stroke-width: 0.75px;
+  pointer-events: none;
+  filter: drop-shadow(0 0 1.5px rgba(0, 191, 255, 0.5));
+}
+
+.web-heart-border {
+  fill: none;
+  stroke: rgba(0, 191, 255, 0.55);
+  stroke-width: 1.5px;
+  pointer-events: none;
+  filter: drop-shadow(0 0 2px rgba(0, 191, 255, 0.7));
+}
+
+/* ==========================================
+   ACUMULADOR FLOTANTE GLOBAL DE CORAZÓN (Pantalla 2 y 3)
+   ========================================== */
+.global-heart-container {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 84px;
+  height: 84px;
+  z-index: 999;
+  background: rgba(10, 15, 36, 0.78);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 51, 102, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.global-heart-container:hover {
+  transform: scale(1.12) rotate(6deg);
+  box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.65), 0 0 25px rgba(255, 51, 102, 0.4);
+}
+
+.global-heart-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8) translateY(50px);
+}
+
+/* Efecto de Pulso Dorado/Rosa cuando se recolecta una pieza */
+.global-heart-container.pulse-glow {
+  animation: global-pulse-glow 1s ease-in-out;
+}
+
+@keyframes global-pulse-glow {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 0px #ff3366;
+  }
+  50% {
+    transform: scale(1.25);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 30px #ff3366, 0 0 15px #ffd700;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 51, 102, 0.2);
+  }
+}
+
+.global-heart-counter {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 3px;
+  text-shadow: 0 1.5px 3px rgba(0, 0, 0, 0.8);
+  font-family: var(--font-sans);
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================
+   ANIMACIÓN DE VUELO FÍSICO ✈️❤️
+   ========================================== */
+.flying-heart-piece {
+  position: absolute;
+  z-index: 10000;
+  pointer-events: none;
+  transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: center;
+  opacity: 1;
+}
+
+/* ==========================================
+   BOTÓN DE PROPUESTA DESBLOQUEABLE (Playlist)
+   ========================================== */
+.unlock-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.btn-unlock {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 15px 35px;
+  border-radius: 30px;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--card-shadow);
+  letter-spacing: 0.5px;
+}
+
+/* Estado Desbloqueado */
+.btn-unlock.unlocked {
+  background: linear-gradient(135deg, #ff3366 0%, #ff6b8b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 0 22px rgba(255, 51, 102, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2);
+  animation: button-unlocked-pulse 2s infinite ease-in-out;
+}
+
+.btn-unlock.unlocked:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 0 32px rgba(255, 51, 102, 0.75), 0 0 10px #ffd700, inset 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes button-unlocked-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(255, 51, 102, 0.8), 0 0 12px #ffd700;
+  }
+}
+
+/* ==========================================
+   PANTALLA 4: PROPUESTA FINAL (Carta Rosa)
+   ========================================== */
+#proposal-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.proposal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 850px;
+  padding: 20px;
+  perspective: 1000px;
+}
+
+/* Sobre Rosa de Propuesta */
+.pink-envelope {
+  background-color: rgba(40, 10, 25, 0.65) !important;
+  border: 1px solid rgba(255, 107, 139, 0.2) !important;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 51, 102, 0.25) !important;
+}
+
+.pink-flap {
+  border-top-color: rgba(75, 20, 48, 0.96) !important;
+  border-left-width: 325px !important;
+  border-right-width: 325px !important;
+  border-top-width: 210px !important;
+}
+
+.pink-pocket {
+  border-left-color: rgba(40, 10, 25, 0.9) !important;
+  border-right-color: rgba(40, 10, 25, 0.9) !important;
+  border-bottom-color: rgba(65, 15, 38, 0.95) !important;
+  border-left-width: 325px !important;
+  border-right-width: 325px !important;
+  border-bottom-width: 210px !important;
+  border-top-width: 210px !important;
+}
+
+/* Carta Romántica */
+#proposal-letter {
+  background-color: #fffafb !important;
+  border: 1.5px solid rgba(255, 107, 139, 0.25);
+}
+
+#proposal-letter h2.letter-title {
+  color: #ff3366 !important;
+  font-weight: 700;
+}
+
+.text-red {
+  color: #ff3366 !important;
+  font-weight: bold;
+}
+
+/* La Gran Pregunta */
+.proposal-question {
+  text-align: center;
+  margin: 18px 0;
+  padding: 15px 20px;
+  background: rgba(255, 51, 102, 0.04);
+  border-radius: 14px;
+  border: 1.5px dashed rgba(255, 51, 102, 0.25);
+}
+
+.proposal-question h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: #ff2255;
+  font-weight: 700;
+  animation: heart-scale-pulse 2.2s infinite ease-in-out;
+}
+
+@keyframes heart-scale-pulse {
+  0%, 100% { transform: scale(1); text-shadow: 0 0 3px rgba(255, 34, 85, 0.15); }
+  50% { transform: scale(1.02); text-shadow: 0 0 8px rgba(255, 34, 85, 0.35); }
+}
+
+/* Botones de Elección (SÍ y NO) */
+.proposal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  margin-top: 15px;
+  position: relative;
+  height: 65px;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-proposal-choice {
+  padding: 12px 35px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* SÍ */
+.yes-choice {
+  background: linear-gradient(135deg, #ff3366 0%, #ff6b8b 100%);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 51, 102, 0.4);
+}
+
+.yes-choice:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 9px 25px rgba(255, 51, 102, 0.6);
+}
+
+/* NO (Evasivo) */
+.no-choice {
+  background: #7f8c8d;
+  color: #fff;
+  transition: top 0.12s ease, left 0.12s ease, transform 0.2s ease !important; /* Movimiento instantáneo y reactivo */
+  z-index: 10005;
+}
+
+/* Lluvia de Celebración */
+.celebration-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  color: #ff3366;
+  font-size: 1.6rem;
+  animation: float-up-heart 4.5s linear forwards;
+  opacity: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+@keyframes float-up-heart {
+  0% {
+    transform: translateY(105vh) translateX(0) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.95;
+  }
+  90% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(-12vh) translateX(var(--drift)) rotate(var(--rotation)) scale(var(--scale));
+    opacity: 0;
+  }
+}
+
+/* Tarjeta de Éxito (Success Card) */
+.success-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  width: 90%;
+  max-width: 480px;
+  background: #fffafb;
+  border-radius: 24px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(255, 51, 102, 0.4);
+  z-index: 10002;
+  color: #2b2b2b;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1.5px solid rgba(255, 107, 139, 0.3);
+}
+
+.success-card.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.success-snoopy {
+  width: 140px;
+  height: auto;
+  margin-bottom: 25px;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.12));
+}
+
+.success-card h2 {
+  font-family: var(--font-serif);
+  color: #ff3366;
+  font-size: 1.75rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.success-card p {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: #3d3d3d;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.success-date {
+  font-size: 0.95rem !important;
+  color: #888 !important;
+  margin-top: 30px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ==========================================
+   RESPONSIVE PARA EL MINIJUEGO 📱
+   ========================================== */
+@media (max-width: 900px) {
+  .global-heart-container {
+    width: 65px;
+    height: 65px;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px;
+  }
+  .global-heart-counter {
+    font-size: 0.7rem;
+  }
+  .pink-flap {
+    border-left-width: 45vw !important;
+    border-right-width: 45vw !important;
+    border-top-width: 30vw !important;
+  }
+  .pink-pocket {
+    border-left-width: 45vw !important;
+    border-right-width: 45vw !important;
+    border-bottom-width: 30vw !important;
+    border-top-width: 30vw !important;
+  }
+  .btn-unlock {
+    padding: 12px 25px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .global-heart-container {
+    width: 58px;
+    height: 58px;
+    bottom: 15px;
+    right: 15px;
+    padding: 6px;
+  }
+  .global-heart-counter {
+    font-size: 0.65rem;
+  }
+  .collectible-heart-wrapper {
+    width: 36px;
+    height: 36px;
+    margin-left: 10px;
+  }
+  .proposal-actions {
+    gap: 20px;
+  }
+  .btn-proposal-choice {
+    padding: 10px 24px;
+    font-size: 1rem;
+  }
+  .success-card {
+    padding: 30px 20px;
+  }
+  .success-card h2 {
+    font-size: 1.4rem;
+  }
+  .success-card p {
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================
+   DISEÑO APPLE MUSIC PLAYER CARD 🍏✨
+   ========================================== */
+.apple-music-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 50px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 0;
+  position: relative;
+  z-index: 5;
+}
+
+/* Tarjeta izquierda del reproductor */
+.apple-player-left {
+  background: rgba(13, 19, 44, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 30px;
+  transition: transform 0.3s ease;
+}
+
+.apple-player-left:hover {
+  transform: translateY(-2px);
+}
+
+/* Contenedor de portada */
+.apple-cover-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 16px;
+  overflow: visible;
+  margin: 0 auto;
+  max-width: 320px;
+}
+
+.apple-song-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.apple-song-cover:hover {
+  transform: scale(1.02);
+}
+
+/* Resplandor ambiental de portada */
+.apple-cover-glow {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: -10px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(25px) saturate(1.8);
+  opacity: 0.65;
+  z-index: 1;
+  transition: background-image 0.5s ease;
+}
+
+/* Fila de Metadata (Título + Artista/Álbum) */
+.apple-metadata-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 5px 0;
+}
+
+.apple-metadata-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  flex: 1;
+  min-width: 0;
+}
+
+.apple-song-title {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.5px;
+}
+
+.apple-song-artist {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Acciones rápidas (Spidey Heart + Menú) */
+.apple-metadata-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.apple-minimal-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.15rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+.apple-minimal-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+/* Contenedor del Scrubber */
+.apple-scrubber-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Barra de rango - Apple Music Style (Estilizado) */
+.apple-scrubber, .apple-volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.apple-scrubber:hover, .apple-volume-slider:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Riel de deslizamiento */
+.apple-scrubber::-webkit-slider-runnable-track, .apple-volume-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+}
+
+/* Tirador (thumb) minimalista que crece al hacer hover */
+.apple-scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  margin-top: 0px;
+  transition: width 0.15s ease, height 0.15s ease, margin-top 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.apple-scrubber:hover::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  margin-top: -4px;
+}
+
+.apple-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  margin-top: -2px;
+  transition: width 0.15s ease, height 0.15s ease, margin-top 0.15s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.apple-volume-slider:hover::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  margin-top: -4px;
+}
+
+/* Firefox Support */
+.apple-scrubber::-moz-range-thumb, .apple-volume-slider::-moz-range-thumb {
+  width: 0px;
+  height: 0px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.apple-scrubber:hover::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+}
+
+.apple-volume-slider:hover::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+}
+
+/* Tiempos debajo de la barra */
+.apple-time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--font-sans);
+}
+
+/* Fila de controles de reproducción */
+.apple-controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+.apple-icon-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+}
+
+.apple-icon-btn:hover {
+  color: #fff;
+  transform: scale(1.08);
+}
+
+.apple-icon-btn:active {
+  transform: scale(0.95);
+}
+
+/* Botones Anterior y Siguiente más grandes */
+.apple-icon-btn.apple-prev-next {
+  font-size: 1.85rem;
+  color: #ffffff;
+}
+
+/* Play/Pause estilo Apple Music (muy grande y limpio) */
+.apple-icon-btn.apple-play-pause {
+  font-size: 2.2rem;
+  color: #ffffff;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.apple-icon-btn.apple-play-pause:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+
+/* Estado activo de Shuffle/Repeat (Brillo rosa y cambio de color) */
+.apple-icon-btn.active {
+  color: #ff3366 !important;
+  text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
+}
+
+/* Fila de Control de Volumen */
+.apple-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.apple-volume-icon {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.9rem;
+  width: 16px;
+  text-align: center;
+}
+
+.apple-volume-slider {
+  flex: 1;
+}
+
+/* Columna derecha de contenidos multimedia (Video + Letras) */
+.apple-media-right {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  height: 100%;
+}
+
+/* Estilos del video dentro de la tarjeta izquierda */
+.apple-player-left .video-window {
+  margin-bottom: 0;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+}
+
+/* Portada de la canción dentro del panel derecho */
+.apple-media-right .apple-cover-container {
+  margin-bottom: 0;
+}
+
+/* Contenedor de Letras Apple Music */
+.apple-lyrics-container {
+  position: relative;
+  flex: 1;
+  min-height: 250px;
+  max-height: 340px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(13, 19, 44, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 10px 0;
+}
+
+.apple-lyrics-fade-top, .apple-lyrics-fade-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.apple-lyrics-fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(13, 19, 44, 0.6) 0%, transparent 100%);
+}
+
+.apple-lyrics-fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(13, 19, 44, 0.6) 0%, transparent 100%);
+}
+
+.apple-lyrics-content {
+  height: 100%;
+  overflow-y: auto;
+  padding: 160px 30px; /* Gran padding vertical para permitir que la primera y última línea se centren a la perfección */
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  text-align: left;
+  position: relative;
+}
+
+/* Estilo exacto de las líneas de letra de Apple Music */
+.apple-lyrics-line {
+  font-family: var(--font-sans);
+  font-size: 1.45rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 700;
+  transition: color 0.35s ease, opacity 0.35s ease, transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.35s ease;
+  cursor: pointer;
+  letter-spacing: -0.5px;
+  transform-origin: left center;
+}
+
+.apple-lyrics-line:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.apple-lyrics-line.active {
+  color: #ffffff;
+  font-size: 1.45rem; /* Mismo font-size base para evitar reflows y saltos de tamaño en el layout */
+  text-shadow: 0 4px 15px rgba(255, 255, 255, 0.35), 0 0 20px rgba(210, 189, 255, 0.25);
+  transform: scale(1.08); /* Se agranda un 8% de manera visual sin desplazar el resto de los elementos */
+  opacity: 1;
+}
+
+/* Responsividad para la maquetación Apple Music */
+@media (max-width: 900px) {
+  .apple-music-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .apple-player-left {
+    padding: 25px;
+  }
+
+  .apple-lyrics-container {
+    min-height: 250px;
+    max-height: 250px;
+  }
+}
+
+/* Recuadro Placeholder para el Video del Novio */
+.apple-video-placeholder {
+  position: relative;
+  min-height: 250px;
+  max-height: 340px;
+  border-radius: 16px;
+  background: rgba(13, 19, 44, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-sans);
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.apple-video-placeholder:hover {
+  background: rgba(13, 19, 44, 0.4);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.video-placeholder-content i {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  color: var(--accent-lavender);
+  opacity: 0.7;
+  animation: pulse-placeholder 2s infinite ease-in-out;
+}
+
+.video-placeholder-content p {
+  font-size: 0.95rem;
+  font-weight: 500;
+  max-width: 240px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+@keyframes pulse-placeholder {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+    filter: drop-shadow(0 0 2px rgba(210, 189, 255, 0));
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.95;
+    filter: drop-shadow(0 0 8px rgba(210, 189, 255, 0.4));
+  }
+}
+
+@media (max-width: 900px) {
+  .apple-video-placeholder {
+    min-height: 250px;
+    max-height: 250px;
+  }
+}
+
+/* Calibrador de Sincronización */
+.apple-sync-calibrator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 15px;
+  margin-top: 5px;
+}
+
+.calibrator-label {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+}
+
+.calibrator-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calibrator-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.calibrator-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent-lavender);
+  color: var(--accent-lavender);
+}
+
+.calibrator-btn:active {
+  transform: scale(0.9);
+}
+
+.calibrator-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-lavender);
+  min-width: 50px;
+  text-align: center;
+  font-family: var(--font-sans);
+}
+
+/* Custom Heart with Bandage Icon Overlay */
+.heart-bandage-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+}
+.heart-base {
+  color: #ff3366;
+  font-size: 1.1em;
+  filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.6));
+}
+.bandage-overlay {
+  position: absolute;
+  color: #e5b358; /* Color curita beige */
+  font-size: 0.52em;
+  transform: rotate(-45deg);
+  opacity: 0.95;
+  text-shadow: none; /* Quitamos el brillo blanco para que no borre la curita */
+}
+
+/* Container for back button and last song guide text */
+.player-back-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 100;
+  flex-wrap: wrap; /* Para móviles si la pantalla es muy pequeña */
+}
+
+/* Pulsing guide text for the last song */
+.last-song-guide-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  color: #ffffff;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  animation: pulse-guide-text 1.6s infinite ease-in-out;
+  text-shadow: 0 0 15px rgba(255, 51, 102, 0.8), 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes pulse-guide-text {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+
+

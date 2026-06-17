@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <title>Para mi niña hermosa ✨🎸</title>
+  <meta name="description" content="Un regalo especial hecho con amor. Canciones tocadas con guitarra especialmente para ti.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons (para botones elegantes) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css?v=6.11">
+</head>
+<body>
+
+  <!-- Fondo de Noche Estrellada Animado -->
+  <div id="starry-sky" class="starry-sky"></div>
+  <div id="shooting-stars" class="shooting-stars"></div>
+  <div id="ambient-glow" class="ambient-glow"></div>
+
+  <!-- PANTALLA 1: BIENVENIDA (Sobre interactivo de Snoopy) -->
+  <section id="welcome-screen" class="active-screen">
+    <div class="welcome-container">
+      <div class="welcome-instruction-container" id="instruction-text">
+        <p class="welcome-instruction-text">ponte audifonos antes d abrir el sobre preciosa:)</p>
+      </div>
+
+      <div class="envelope-wrapper" id="envelope-wrapper">
+        <div class="envelope" id="envelope">
+          <div class="flap"></div>
+          <div class="pocket"></div>
+          <div class="letter" id="letter">
+            <!-- Stickers decorativos sueltos de Snoopy y Woodstock -->
+            <img src="assets/images/woodstock.png" alt="Woodstock" class="woodstock-sticker">
+            <img src="assets/images/snoopy_heart.png" alt="Snoopy Corazón" class="snoopy-sticker">
+            
+            <div class="letter-header">
+              <img src="assets/images/snoopy_stars.png" alt="Snoopy Estrellas" class="snoopy-badge">
+              <h2 class="letter-title">Para mi chinita linda ❤️</h2>
+            </div>
+            <div class="letter-body">
+              <p>Hola mi amor,</p>
+              <p>Desde nuestra platica el otro dia estuve pensando en la manera de pedirte a distancia, peroo como sabes soy medio necio, entonces mi idea que ya tenia de pedida la "modifique" si se puede decir jaja, a algo que pudiera enviarte a distancia y que aun asi siguiera siendo un lindo detalle, algo que sea unico de nosotros, asi que pense en algo que siempre te recordara lo mucho que me gusta tocar para ti y lo especial que eres para mi</p>
+              <p>Cada cancion de esta playlist es especial porque cada que las escuho no es solamente que me recuerden a ti, si no que tambien me hacen sentir en paz y tranquilidad, y cuando las toco de alguna manera tambien me hacen sentirte cerca mio. Cada una va con un pedacito de mi corazon asi que espero disfrutes escuchandolas asi como yo siempre voy a disfrutar cantar y tocar para ti :)</p>
+            </div>
+            <p class="signature-red">Con todo mi amor por siempre, tu flaquito 💕</p>
+            <div class="letter-footer">
+              <button id="btn-to-playlist" class="btn-glow">
+                <span>Escuchar nuestra playlist ✨</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANTALLA 2: PLAYLIST (Lista de canciones flotantes) -->
+  <section id="playlist-screen" class="hidden-screen">
+    <div class="playlist-container">
+      <header class="playlist-header">
+        <h1 class="glow-title">:) <span class="heart-bandage-wrapper"><i class="fa-solid fa-heart heart-base"></i><i class="fa-solid fa-bandage bandage-overlay"></i></span></h1>
+        <p class="subtitle">Selecciona una canción para escucharla y ver la letra</p>
+      </header>
+
+      <div class="playlist-grid" id="playlist-grid">
+        <!-- Canciones inyectadas dinámicamente mediante JS -->
+      </div>
+
+      <!-- Botón especial desbloqueable para la propuesta -->
+      <div class="unlock-btn-container">
+        <button id="btn-unlock-proposal" class="btn-unlock locked" disabled>
+          <i class="fa-solid fa-lock"></i> <span>Junta los 9 pedacitos de mi corazaooo para seguir:)</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANTALLA 3: REPRODUCTOR DETALLADO (Pantalla Dividida) -->
+  <section id="player-screen" class="hidden-screen">
+    <div class="player-container">
+      <!-- Botón de regreso a playlist -->
+      <div class="player-back-row">
+        <button id="btn-back-to-playlist" class="btn-back" aria-label="Volver a la lista de canciones">
+          <i class="fa-solid fa-arrow-left"></i> Volver a la Playlist
+        </button>
+        <span id="last-song-guide-text" class="last-song-guide-text hidden">ahora vuelve a la playlist aqui miamor</span>
+      </div>
+
+      <div class="apple-music-layout">
+        <!-- LADO IZQUIERDO: Tarjeta de Reproducción Apple Music con Portada y Controles -->
+        <div class="apple-player-left">
+          <!-- Portada de la canción con su resplandor ambiental -->
+          <div class="apple-cover-container">
+            <div class="apple-cover-glow" id="cover-glow-back"></div>
+            <img id="player-song-cover" src="assets/covers/perfect.png" alt="Portada de la canción" class="apple-song-cover">
+          </div>
+
+          <div class="apple-metadata-row">
+            <div class="apple-metadata-info">
+              <h2 id="player-song-title" class="apple-song-title">Song Title</h2>
+              <h3 id="player-song-artist" class="apple-song-artist">Artist Name</h3>
+            </div>
+            <div class="apple-metadata-actions">
+              <!-- Corazón coleccionable Spidey integrado -->
+              <div id="collectible-heart-wrapper" class="collectible-heart-wrapper" title="¡Haz clic para recolectar este pedazo de mi corazón! ❤️">
+                <svg viewBox="0 0 100 100" class="collectible-heart-svg">
+                  <defs>
+                    <clipPath id="collectible-heart-clip">
+                      <path d="M50 88.5 L44.3 83.3 C23.2 64.2 10 51.5 10 36 C10 23.3 19.9 13.5 32.5 13.5 C39.6 13.5 46.4 16.8 50 22 C53.6 16.8 60.4 13.5 67.5 13.5 C80.1 13.5 90 23.3 90 36 C90 51.5 76.8 64.2 55.7 83.3 Z" />
+                    </clipPath>
+                  </defs>
+                  <g clip-path="url(#collectible-heart-clip)">
+                    <path id="coll-seg-0" class="coll-seg" d="M 50 48 L 150 48 L 126.6 112.3 Z" />
+                    <path id="coll-seg-1" class="coll-seg" d="M 50 48 L 126.6 112.3 L 67.4 146.5 Z" />
+                    <path id="coll-seg-2" class="coll-seg" d="M 50 48 L 67.4 146.5 L 0 134.6 Z" />
+                    <path id="coll-seg-3" class="coll-seg" d="M 50 48 L 0 134.6 L -44 82.2 Z" />
+                    <path id="coll-seg-4" class="coll-seg" d="M 50 48 L -44 82.2 L -44 13.8 Z" />
+                    <path id="coll-seg-5" class="coll-seg" d="M 50 48 L -44 13.8 L 0 -38.6 Z" />
+                    <path id="coll-seg-6" class="coll-seg" d="M 50 48 L 0 -38.6 L 67.4 -50.5 Z" />
+                    <path id="coll-seg-7" class="coll-seg" d="M 50 48 L 67.4 -50.5 L 126.6 -16.3 Z" />
+                    <path id="coll-seg-8" class="coll-seg" d="M 50 48 L 126.6 -16.3 L 150 48 Z" />
+                    <line x1="50" y1="48" x2="150" y2="48" class="web-line" />
+                    <line x1="50" y1="48" x2="126.6" y2="112.3" class="web-line" />
+                    <line x1="50" y1="48" x2="67.4" y2="146.5" class="web-line" />
+                    <line x1="50" y1="48" x2="0" y2="134.6" class="web-line" />
+                    <line x1="50" y1="48" x2="-44" y2="82.2" class="web-line" />
+                    <line x1="50" y1="48" x2="-44" y2="13.8" class="web-line" />
+                    <line x1="50" y1="48" x2="0" y2="-38.6" class="web-line" />
+                    <line x1="50" y1="48" x2="67.4" y2="-50.5" class="web-line" />
+                    <line x1="50" y1="48" x2="126.6" y2="-16.3" class="web-line" />
+                    <path d="M 65 48 Q 58.5 52.0 61.5 57.6 Q 53.5 59.5 52.6 62.8 Q 44.5 60.5 42.5 61.0 Q 37.0 55.5 35.9 53.1 Q 33.5 47.0 35.9 42.9 Q 37.0 37.0 42.5 35.0 Q 44.5 32.5 52.6 33.2 Q 53.5 34.0 61.5 38.4 Q 58.5 42.0 65 48" class="web-heart-strand" />
+                    <path d="M 80 48 Q 67.0 56.0 73.0 67.3 Q 57.0 71.0 55.2 77.6 Q 39.0 73.0 35.0 74.0 Q 24.0 63.0 21.8 58.3 Q 17.0 46.0 21.8 37.7 Q 24.0 26.0 35.0 22.0 Q 39.0 17.0 55.2 18.4 Q 57.0 20.0 73.0 28.7 Q 67.0 36.0 80 48" class="web-heart-strand" />
+                    <path d="M 95 48 Q 75.5 60.0 84.5 76.9 Q 60.5 82.5 57.8 92.3 Q 33.5 85.0 27.5 87.0 Q 11.0 71.0 7.7 63.4 Q 0.5 45.0 7.7 32.6 Q 11.0 16.0 27.5 9.0 Q 33.5 0.5 57.8 3.7 Q 60.5 5.0 84.5 19.1 Q 75.5 30.0 95 48" class="web-heart-strand" />
+                  </g>
+                  <path d="M50 88.5 L44.3 83.3 C23.2 64.2 10 51.5 10 36 C10 23.3 19.9 13.5 32.5 13.5 C39.6 13.5 46.4 16.8 50 22 C53.6 16.8 60.4 13.5 67.5 13.5 C80.1 13.5 90 23.3 90 36 C90 51.5 76.8 64.2 55.7 83.3 Z" class="web-heart-border" />
+                </svg>
+              </div>
+              <button class="apple-minimal-btn" title="Opciones" aria-label="Más opciones">
+                <i class="fa-solid fa-ellipsis"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Barra de Progreso / Scrubber -->
+          <div class="apple-scrubber-container">
+            <input type="range" id="player-scrubber" class="apple-scrubber" min="0" max="100" value="0" step="0.1" aria-label="Barra de progreso">
+            <div class="apple-time-display">
+              <span id="player-current-time">0:00</span>
+              <span id="player-total-time">-0:00</span>
+            </div>
+          </div>
+
+          <!-- Controles de Reproducción Minimalistas -->
+          <div class="apple-controls-row">
+            <button id="btn-shuffle" class="apple-icon-btn" title="Aleatorio" aria-label="Modo aleatorio">
+              <i class="fa-solid fa-shuffle"></i>
+            </button>
+            <button id="btn-prev-song" class="apple-icon-btn apple-prev-next" title="Anterior" aria-label="Canción anterior">
+              <i class="fa-solid fa-backward-step"></i>
+            </button>
+            <button id="btn-play-pause" class="apple-icon-btn apple-play-pause" title="Reproducir/Pausar" aria-label="Reproducir o Pausar">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <button id="btn-next-song" class="apple-icon-btn apple-prev-next" title="Siguiente" aria-label="Siguiente canción">
+              <i class="fa-solid fa-forward-step"></i>
+            </button>
+            <button id="btn-repeat" class="apple-icon-btn" title="Repetir" aria-label="Modo repetir">
+              <i class="fa-solid fa-repeat"></i>
+            </button>
+          </div>
+
+          <!-- Control de Volumen -->
+          <div class="apple-volume-row">
+            <i class="fa-solid fa-volume-low apple-volume-icon"></i>
+            <input type="range" id="player-volume" class="apple-volume-slider" min="0" max="100" value="100" aria-label="Volumen">
+            <i class="fa-solid fa-volume-high apple-volume-icon"></i>
+          </div>
+        </div>
+
+        <!-- LADO DERECHO: Video de la canción y Letra Dinámica -->
+        <div class="apple-media-right">
+          <div class="apple-video-placeholder" id="video-placeholder">
+            <div class="video-placeholder-content" id="video-placeholder-content">
+              <i class="fa-solid fa-video"></i>
+              <p>Aquí irá tu video tocando la canción 🎥</p>
+            </div>
+            <video id="native-video-player" playsinline style="display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 16px;"></video>
+          </div>
+
+          <div class="apple-lyrics-container" id="lyrics-container">
+            <div class="apple-lyrics-fade-top"></div>
+            <div class="apple-lyrics-content" id="lyrics-content">
+              <!-- Letra inyectada dinámicamente -->
+            </div>
+            <div class="apple-lyrics-fade-bottom"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Elemento de audio nativo oculto para la reproducción de la playlist -->
+      <audio id="native-audio-player" style="display:none;"></audio>
+    </div>
+  </section>
+
+  <!-- PANTALLA 4: PROPUESTA FINAL (Carta de propuesta íntima) -->
+  <section id="proposal-screen" class="hidden-screen">
+    <div class="proposal-container">
+      <div class="envelope-wrapper pink-envelope" id="proposal-envelope-wrapper">
+        <div class="envelope" id="proposal-envelope">
+          <div class="flap pink-flap"></div>
+          <div class="pocket pink-pocket"></div>
+          <div class="letter" id="proposal-letter">
+            <!-- Flores y decoraciones de Snoopy de noviazgo -->
+            <img src="assets/images/woodstock.png" alt="Woodstock" class="woodstock-sticker">
+            <img src="assets/images/snoopy_heart.png" alt="Snoopy Corazón" class="snoopy-sticker">
+            
+            <div class="letter-header">
+              <img src="assets/images/spiderman_heart.png" alt="Spiderman Corazón" class="snoopy-badge">
+              <h2 class="letter-title">Para mi niña hermosa... 💖</h2>
+            </div>
+            
+            <div class="letter-body">
+              <p>Chinita, si estás leyendo esto es porque ya escuchaste la playlist y recogiste los pedacitos de mi corazaoo, así como lo haces conmigo todos los días (aunque a veces no te des cuenta :). Por eso traté de demostrarte en este detalle cómo se siente eso para mí y lo mucho que, la verdad, te adueñaste de mi corazón desde el fakin día 1. Y aunque no siempre supe cómo expresarlo, hoy te quiero contar un poquito de lo que todo esto significa para mí.</p>
+              <p>Aunque muchos digan que la distancia es difícil, y aunque en algunos momentos así parezca, la verdad es que contigo es diferente. Tenerte en mi vida es la cosa más fácil y natural del mundo, y sin importar los kilómetros, te seguiría eligiendo hoy y mil veces más. Estar lejos solo me ha enseñado a valorar cada segundo de nuestras llamadas, cada mensaje, cada voicenote y a soñar más fuerte con el día en que por fin podamos estar juntos. Cada plática, cada risa y cada momento contigo me han dejado clarísimo que no me imagino mis días si no es compartiéndolos contigo.</p>
+              
+              <p>Porque para mí...</p>
+              
+              <p>Estar contigo es <span class="text-red">sencillo</span> y sentirse en <span class="text-red">paz</span>.</p>
+              <p>Estar contigo es una <span class="text-red">risa asegurada</span> y una plática que <span class="text-red">nunca</span> quiero que termine.</p>
+              <p>Estar contigo es pasarla <span class="text-red">increíble</span> en cualquier cita y ser sencillamente <span class="text-red">feliz</span>.</p>
+              <p>Estar contigo es que, incluso en el <span class="text-red">silencio</span>, no necesitar saber qué <span class="text-red">decir</span>.</p>
+              <p>Estar contigo es sentirme <span class="text-red">comprendido</span>, <span class="text-red">seguro</span> y completamente <span class="text-red">amado</span>.</p>
+              <p>Estar contigo es <span class="text-red">pensar</span> en ti todo el día y hacer que la <span class="text-red">distancia</span> desaparezca.</p>
+              <p>Estar contigo es sentir que los <span class="text-red">kilómetros no existen</span>.</p>
+              <p>Estar contigo es estar en mi lugar <span class="text-red">favorito</span>.</p>
+              <p>Estar contigo es darme cuenta de que la espera siempre <span class="text-red">vale la pena</span>.</p>
+              <p>Estar contigo es <span class="text-red">sentir la música</span> de otra manera.</p>
+              <p>Estar contigo es poder expresar con <span class="text-red">6 cuerdas</span> lo que no siempre me sale con <span class="text-red">palabras</span>.</p>
+              <p>Estar contigo me da <span class="text-red">fuerza</span> en mis peores momentos y me hace querer ser un <span class="text-red">mejor hombre</span> para ti.</p>
+              <p>Estar contigo es querer que nuestro tiempo juntos <span class="text-red">nunca se acabe</span>.</p>
+              
+              <p style="margin-top: 15px; font-weight: bold;">Siempre <span class="text-red">elegiré</span> estar contigo.</p>
+              
+              <p style="margin-top: 15px;">Por todo esto, quiero que demos un paso más juntos. Quiero ser tuyo y que tú seas mía, darte mi mejor versión todos los días, cuidarte, amarte y seguir haciéndote sentir segura a mi lado.</p>
+              <p>Así que, después de entregarte mi voz y cada pedacito de mi corazaoo, te hago la siguiente pregunta:</p>
+              
+              <!-- La Gran Pregunta -->
+              <div class="proposal-question">
+                <h3>¿Te gustaría ser mi novia? 🌹</h3>
+              </div>
+              
+              <div class="proposal-actions">
+                <button id="btn-proposal-yes" class="btn-proposal-choice yes-choice">
+                  <i class="fa-solid fa-heart"></i> ¡SÍ, QUIERO!
+                </button>
+                <button id="btn-proposal-no" class="btn-proposal-choice no-choice">
+                  NO 😢
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Lluvia de corazones para la celebración -->
+      <div id="celebration-container" class="celebration-container"></div>
+      
+      <!-- Tarjeta de confirmación post-aceptación -->
+      <div id="success-card" class="success-card hidden">
+        <img src="assets/images/spiderman_snoopy_kiss.png" alt="Snoopy y Belle Beso Spiderman" class="success-snoopy">
+        <h2>MUAAAA T MANDO NUESTRO PRIMER BESO D PAREJA AUN QUE SEA A LA DISTANCIA 😘❤️</h2>
+        <p>ya te llenare de besos cuando te vea:), me haces el flaquito mas feliz del mundo, te amo con todo mi corazon y asi sera siempre 💕</p>
+        <p class="success-date">Día oficial: 18 de Junio 2026 ✨</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACUMULADOR FLOTANTE GLOBAL DE CORAZÓN -->
+  <div id="global-heart-progress" class="global-heart-container hidden">
+    <svg viewBox="0 0 100 100" class="global-heart-svg">
+      <defs>
+        <clipPath id="global-heart-clip">
+          <path d="M50 88.5 L44.3 83.3 C23.2 64.2 10 51.5 10 36 C10 23.3 19.9 13.5 32.5 13.5 C39.6 13.5 46.4 16.8 50 22 C53.6 16.8 60.4 13.5 67.5 13.5 C80.1 13.5 90 23.3 90 36 C90 51.5 76.8 64.2 55.7 83.3 Z" />
+        </clipPath>
+      </defs>
+      <g clip-path="url(#global-heart-clip)">
+        <path id="global-seg-0" class="heart-seg" d="M 50 48 L 150 48 L 126.6 112.3 Z" />
+        <path id="global-seg-1" class="heart-seg" d="M 50 48 L 126.6 112.3 L 67.4 146.5 Z" />
+        <path id="global-seg-2" class="heart-seg" d="M 50 48 L 67.4 146.5 L 0 134.6 Z" />
+        <path id="global-seg-3" class="heart-seg" d="M 50 48 L 0 134.6 L -44 82.2 Z" />
+        <path id="global-seg-4" class="heart-seg" d="M 50 48 L -44 82.2 L -44 13.8 Z" />
+        <path id="global-seg-5" class="heart-seg" d="M 50 48 L -44 13.8 L 0 -38.6 Z" />
+        <path id="global-seg-6" class="heart-seg" d="M 50 48 L 0 -38.6 L 67.4 -50.5 Z" />
+        <path id="global-seg-7" class="heart-seg" d="M 50 48 L 67.4 -50.5 L 126.6 -16.3 Z" />
+        <path id="global-seg-8" class="heart-seg" d="M 50 48 L 126.6 -16.3 L 150 48 Z" />
+        <line x1="50" y1="48" x2="150" y2="48" class="web-line" />
+        <line x1="50" y1="48" x2="126.6" y2="112.3" class="web-line" />
+        <line x1="50" y1="48" x2="67.4" y2="146.5" class="web-line" />
+        <line x1="50" y1="48" x2="0" y2="134.6" class="web-line" />
+        <line x1="50" y1="48" x2="-44" y2="82.2" class="web-line" />
+        <line x1="50" y1="48" x2="-44" y2="13.8" class="web-line" />
+        <line x1="50" y1="48" x2="0" y2="-38.6" class="web-line" />
+        <line x1="50" y1="48" x2="67.4" y2="-50.5" class="web-line" />
+        <line x1="50" y1="48" x2="126.6" y2="-16.3" class="web-line" />
+        <path d="M 65 48 Q 58.5 52.0 61.5 57.6 Q 53.5 59.5 52.6 62.8 Q 44.5 60.5 42.5 61.0 Q 37.0 55.5 35.9 53.1 Q 33.5 47.0 35.9 42.9 Q 37.0 37.0 42.5 35.0 Q 44.5 32.5 52.6 33.2 Q 53.5 34.0 61.5 38.4 Q 58.5 42.0 65 48" class="web-heart-strand" />
+        <path d="M 80 48 Q 67.0 56.0 73.0 67.3 Q 57.0 71.0 55.2 77.6 Q 39.0 73.0 35.0 74.0 Q 24.0 63.0 21.8 58.3 Q 17.0 46.0 21.8 37.7 Q 24.0 26.0 35.0 22.0 Q 39.0 17.0 55.2 18.4 Q 57.0 20.0 73.0 28.7 Q 67.0 36.0 80 48" class="web-heart-strand" />
+        <path d="M 95 48 Q 75.5 60.0 84.5 76.9 Q 60.5 82.5 57.8 92.3 Q 33.5 85.0 27.5 87.0 Q 11.0 71.0 7.7 63.4 Q 0.5 45.0 7.7 32.6 Q 11.0 16.0 27.5 9.0 Q 33.5 0.5 57.8 3.7 Q 60.5 5.0 84.5 19.1 Q 75.5 30.0 95 48" class="web-heart-strand" />
+      </g>
+      <path d="M50 88.5 L44.3 83.3 C23.2 64.2 10 51.5 10 36 C10 23.3 19.9 13.5 32.5 13.5 C39.6 13.5 46.4 16.8 50 22 C53.6 16.8 60.4 13.5 67.5 13.5 C80.1 13.5 90 23.3 90 36 C90 51.5 76.8 64.2 55.7 83.3 Z" class="web-heart-border" />
+    </svg>
+    <div class="global-heart-counter">
+      <span id="global-collected-count">0</span>/9
+    </div>
+  </div>
+
+  <!-- YouTube IFrame Player API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <!-- App JS Files -->
+  <script src="songs_v6.js?v=6.24"></script>
+  <script src="app_v6.js?v=6.25"></script>
+</body>
+</html>
