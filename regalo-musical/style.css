@@ -1092,8 +1092,8 @@ body {
 
 /* Contenedor del Corazón Coleccionable en el Reproductor */
 .collectible-heart-wrapper {
-  width: 82px; /* Aumentado en un 70% */
-  height: 82px; /* Aumentado en un 70% */
+  width: 66px; /* Ajustado para ser un 20% más pequeño que antes */
+  height: 66px; /* Ajustado para ser un 20% más pequeño que antes */
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
