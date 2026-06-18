@@ -460,13 +460,15 @@ function renderPlaylist() {
     card.classList.add("song-card");
     card.dataset.index = index;
     
+    const cleanComment = song.comment.replace(/^\s*\(\s*/, '').replace(/\s*\)\s*$/, '');
+    
     card.innerHTML = `
       <div class="card-cover-wrapper">
         <img src="${song.cover}" alt="Portada de ${song.title}" class="song-card-cover" onerror="this.src='https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=500&q=80'">
       </div>
       <div class="song-card-details">
         <h2 class="song-card-title">${song.title} <span class="song-card-artist">by ${song.artist}</span></h2>
-        <p class="song-card-comment">"${song.comment}"</p>
+        <p class="song-card-comment">"${cleanComment}"</p>
       </div>
     `;
     
@@ -1209,6 +1211,16 @@ function updateHeartProgressUI() {
   const countEl = document.getElementById("global-collected-count");
   if (countEl) {
     countEl.textContent = count;
+  }
+
+  // Toggle completed-glow class for the global heart badge
+  const globalHeartContainer = document.getElementById("global-heart-progress");
+  if (globalHeartContainer) {
+    if (count === totalSongs) {
+      globalHeartContainer.classList.add("completed-glow");
+    } else {
+      globalHeartContainer.classList.remove("completed-glow");
+    }
   }
   
   // Habilitar / Deshabilitar botón de propuesta en playlist

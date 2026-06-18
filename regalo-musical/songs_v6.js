@@ -338,34 +338,34 @@ const songsData = [
     lyrics: `[00:00.00] (Instrumental)
 [00:09.00] Parece tan azaroso aquello que nos salva
 [00:14.00] Se vuelve tan valioso el beso de la calma
-[00:19.00] El peso de las almas and su abrazo ansioso
+[00:19.00] El peso de las almas y su abrazo ansioso
 [00:23.00] Enlazadas entre sí en el borde de la cama
 [00:27.50] Como si nada me pasara, posando
 [00:31.50] Entre miradas desgastadas, pensando
 [00:35.50] Siempre un poco más de lo necesario
 [00:39.50] Recordé tu piel, mi fiel confesionario
 [00:43.50] Entre humo y otra reflexión barata
-[00:47.50] No oculto mis temores, porque solo me delatan
+[00:47.50] No oculto mis temores porque solo me delatan
 [00:51.50] Asumo los errores y así no me matan
-[00:55.50] A lo sumo uso esta vida como fe de erratas
+[00:55.50] A lo sumo, uso esta vida como fe de erratas
 [01:00.00] Siento un vacío, como vos en el atardecer
 [01:04.00] Tu figura tan lejana se quiere desvanecer
 [01:08.00] Estoy loopeado en un sueño en el que no puedo correr
 [01:12.00] Mi ser no puede gritar, nada me saca la sed
-[01:16.00] Me preguntas: ¿A dónde vas? ¿Por qué te escapas?
-[01:20.00] Es que capaz, yo solo le sumo un peso de más
+[01:16.00] Me preguntás: "¿a dónde vas?, ¿por qué te escapás?"
+[01:20.00] Es que capaz yo solo le sumo un peso de más
 [01:24.00] Bebiendo el vaso como si en el fondo hallara paz
-[01:28.00] Pero pa' encontrarla hay que tomar otro más
-[01:32.00] Ahora, ya no culpo a las rutinas
+[01:28.00] Pero, pa encontrarla, hay que tomar otro más
+[01:32.00] Ahora ya no culpo a las rutinas
 [01:36.00] Si algunas te aplacan y otras te salvan la vida
 [01:40.00] Cuando creí que ya me la sabía
-[01:44.00] Llegaste pa' llenarme los ojos de intriga
+[01:44.00] Llegaste pa llenarme los ojos de intriga
 [01:48.00] Quizás peque de egoísta empedernido
 [01:52.00] Porque cuento la tristeza y la felicidad la vivo
-[01:56.00] Convivo with el vacío y lo convido
-[02:00.00] Hacia el alojo de otro oído pa' no hablar solo conmigo
+[01:56.00] Convivo con el vacío y lo convido hacia el alojo de otro oído
+[02:00.00] Pa no hablar solo conmigo
 [02:04.50] Bah
-[02:06.50] En algún momento tengo que salir
+[02:06.50] Y, en algún momento, tengo que salir
 [02:10.00] No puedo estar viviendo todo el día en mí
 [02:14.00] Buscando las razones de lo que no es
 [02:17.50] O las explicaciones de lo que no fui
@@ -374,9 +374,46 @@ const songsData = [
 [02:29.50] Buscando algún resquicio para respirar
 [02:33.50] Y transformar la sombra en una luz marfil
 [02:38.00] Hoy vuelvo a caminar
-[02:41.50] Queriendo encontrar alguna señal en el tiempo
+[02:40.00] Queriendo encontrar
+[02:42.50] Alguna señal en el tiempo
 [02:45.50] Hoy vuelvo a soñar
-[02:49.50] O a imaginar alguna señal todo el tiempo`
+[02:48.00] O a imaginar
+[02:50.50] Alguna señal todo el tiempo
+[02:54.50] El hastío de amoldarnos a los hábitos
+[02:56.80] Que dictamina el juez colectivo de lo válido
+[02:59.50] Me animo a lo lento y perceptivo de mi ánimo
+[03:02.00] Aun cuando lo sensible muere en manos de lo rápido
+[03:05.00] Ya entendí por qué gusto de lo cálido
+[03:07.50] Es que pensar en vos es como acercarse al fuego
+[03:10.50] Ese que hizo cenizas del oráculo
+[03:13.00] Incinerando destinos para escribirlos de nuevo
+[03:16.00] Cataratas en el iris por un "casi"
+[03:18.50] Catarsis, frases que no pasan por la bilis
+[03:21.00] Es así, aunque te suene a antítesis
+[03:23.50] A veces, la crisis está a un paso del oasis
+[03:26.00] El tiempo ya no suma ni resta
+[03:28.50] Solo está orquestando su obra maestra
+[03:31.00] Cada quien desarrolla su papel en esta puesta
+[03:33.50] Dudo que alguna vez la vida haya sido nuestra
+[03:36.00] No molesta, hasta genera alivio
+[03:38.50] Saber que no sé si alguna vez seré yo mismo
+[03:41.00] En esta ciudad, se escuchan cantos y delirios
+[03:43.50] Llantos y jolgorios brotan de un cielo de ripio
+[03:46.50] Bah
+[03:48.00] Y, en algún momento, tengo que salir
+[03:50.00] No puedo estar viviendo todo el día en mí
+[03:52.00] Buscando las razones de lo que no es
+[03:54.00] O las explicaciones de lo que no fui
+[03:56.00] En esta maratón que no tiene final
+[03:58.00] La multitud que corre sin saber por qué
+[04:00.00] Buscando algún resquicio para respirar
+[04:02.00] Y transformar la sombra en una luz marfil
+[04:04.00] Hoy vuelvo a caminar
+[04:06.00] Queriendo encontrar
+[04:08.00] Alguna señal en el tiempo
+[04:10.00] Hoy vuelvo a soñar
+[04:12.00] O a imaginar
+[04:14.00] Alguna señal todo el tiempo`
   },
   {
     id: "yoko",

@@ -1092,8 +1092,8 @@ body {
 
 /* Contenedor del Corazón Coleccionable en el Reproductor */
 .collectible-heart-wrapper {
-  width: 48px;
-  height: 48px;
+  width: 82px; /* Aumentado en un 70% */
+  height: 82px; /* Aumentado en un 70% */
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
@@ -1104,7 +1104,7 @@ body {
 }
 
 .collectible-heart-wrapper:hover {
-  transform: scale(1.22);
+  transform: scale(1.15);
 }
 
 .collectible-heart-svg, .global-heart-svg {
@@ -1126,18 +1126,17 @@ body {
   fill: #ff3366;
   filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.95));
   cursor: pointer;
-  animation: pulse-red-glow 1.8s infinite ease-in-out;
+  animation: pulse-red-glow 2.0s infinite ease-in-out;
 }
 
 @keyframes pulse-red-glow {
   0%, 100% {
-    fill: #ff2255;
-    filter: drop-shadow(0 0 5px rgba(255, 34, 85, 0.6));
+    opacity: 0.5; /* parpadeando levemente muy tenue */
+    filter: drop-shadow(0 0 4px rgba(255, 34, 85, 0.5));
   }
   50% {
-    fill: #ff4477;
-    filter: drop-shadow(0 0 12px rgba(255, 68, 119, 1));
-    transform: scale(1.02);
+    opacity: 0.95;
+    filter: drop-shadow(0 0 12px rgba(255, 68, 119, 0.9));
   }
 }
 
@@ -1206,6 +1205,22 @@ body {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.8) translateY(50px);
+}
+
+.global-heart-container.completed-glow {
+  animation: completed-heart-glow-pulse 2.2s infinite ease-in-out;
+  border-color: rgba(255, 51, 102, 0.6);
+}
+
+@keyframes completed-heart-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 12px rgba(255, 51, 102, 0.4);
+    transform: scale(1.0);
+  }
+  50% {
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 28px rgba(255, 51, 102, 0.95);
+    transform: scale(1.08);
+  }
 }
 
 /* Efecto de Pulso Dorado/Rosa cuando se recolecta una pieza */
@@ -2187,23 +2202,42 @@ body {
 /* Pulsing guide text for the last song */
 .last-song-guide-text {
   font-family: 'Playfair Display', serif;
-  font-size: 1.35rem;
+  font-size: 1.0rem; /* Más equilibrado */
   color: #ffffff;
   font-style: italic;
   font-weight: 600;
   letter-spacing: 0.5px;
-  animation: pulse-guide-text 1.6s infinite ease-in-out;
-  text-shadow: 0 0 15px rgba(255, 51, 102, 0.8), 0 0 8px rgba(255, 255, 255, 0.5);
+  position: absolute;
+  bottom: 110px; /* Flota por encima de .global-heart-container (84px de alto + padding) */
+  right: 0px;
+  white-space: nowrap;
+  background: rgba(255, 51, 102, 0.95);
+  padding: 6px 14px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(255, 51, 102, 0.5);
+  animation: pulse-guide-text-glow 1.8s infinite ease-in-out, slide-up-fade 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  pointer-events: none;
 }
 
-@keyframes pulse-guide-text {
+@keyframes slide-up-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-guide-text-glow {
   0%, 100% {
-    opacity: 0.8;
-    transform: scale(1);
+    opacity: 0.9;
+    box-shadow: 0 4px 12px rgba(255, 51, 102, 0.5);
   }
   50% {
-    opacity: 1;
-    transform: scale(1.02);
+    opacity: 1.0;
+    box-shadow: 0 4px 22px rgba(255, 51, 102, 0.9);
   }
 }
 
